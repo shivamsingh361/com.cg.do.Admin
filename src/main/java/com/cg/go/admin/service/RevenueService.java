@@ -1,15 +1,22 @@
 package com.cg.go.admin.service;
 
-import java.util.Map;
+import java.util.List;
 
 import com.cg.go.admin.dto.Order;
+import com.cg.go.admin.dto.ResultSet;
+import com.cg.go.admin.exceptions.InvalidFormatException;
+import com.cg.go.admin.exceptions.UnknownException;
 
 public interface RevenueService {
-	double TotalOrderAmountbyDate(String to, String from);
 	Iterable<Order> findAll();
-	
-	double revenueGenerated(String from, String to);
-	double revenueGenerated(String date);
-	Map<String, Double> getCostOfOrderForStatus(String date, String status);
-	Map<String, Double> getCostOfOrderForStatus(String from, String to, String status);
+
+	double revenueGenerated(String from, String to) throws InvalidFormatException, UnknownException;
+
+	double revenueGenerated(String date) throws InvalidFormatException, UnknownException;
+
+	List<ResultSet> getCostOfOrderForStatus(String date, String status)
+			throws InvalidFormatException, UnknownException;
+
+	List<ResultSet> getCostOfOrderForStatus(String from, String to, String status)
+			throws InvalidFormatException, UnknownException;
 }
