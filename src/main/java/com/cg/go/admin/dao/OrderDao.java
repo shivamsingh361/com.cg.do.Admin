@@ -42,23 +42,23 @@ public interface OrderDao extends CrudRepository<Order, String> {
 	// 7. Return Quantity sold(status=delivered) group by category between the
 	// given dates.
 	@Query(value = "select p.category as Category, sum(opm.quantity) Qty from  (order_product_mapping opm inner join order_table ot using(order_id)) "
-			+ "	inner join product_table p using(product_id) where ot.order_date >= ?1 and ot.order_date <= ?2 and ot.status='Delivered'  group by p.category", nativeQuery = true)
+			+ "inner join product_table p using(product_id) where ot.order_date >= ?1 and ot.order_date <= ?2 and ot.status='Delivered'  group by p.category", nativeQuery = true)
 	List<ResultSet> quantitySoldGroupByCategory(String from, String to);
 
 	// 8. Return Quantity sold(status=delivered) group by category on given date.
 	@Query(value = "select p.category as Category, sum(opm.quantity) Qty from  (order_product_mapping opm inner join order_table ot using(order_id)) "
-			+ "	inner join product_table p using(product_id) where ot.order_date = ?1 and ot.status='Delivered' group by p.category", nativeQuery = true)
+			+ "inner join product_table p using(product_id) where ot.order_date = ?1 and ot.status='Delivered' group by p.category", nativeQuery = true)
 	List<ResultSet> quantitySoldGroupByCategory(String date);
 
 	// 9. Return Quantity cancelled order group by category between the given date
 	// (Inclusive).
 	@Query(value = "select p.category as Category, sum(opm.quantity) Qty from  (order_product_mapping opm inner join order_table ot using(order_id)) "
-			+ "	inner join product_table p using(product_id) where ot.order_date >= ?1 and ot.order_date <= ?2 and ot.status='Cancelled'  group by p.category", nativeQuery = true)
+			+ "inner join product_table p using(product_id) where ot.order_date >= ?1 and ot.order_date <= ?2 and ot.status='Cancelled'  group by p.category", nativeQuery = true)
 	List<ResultSet> quantityCancelledGroupByCategory(String from, String to);
 
 	// 10. Return Quantity cancelled order group by category on the given date.
 	@Query(value = "select p.category as Category, sum(opm.quantity) Qty from  (order_product_mapping opm inner join order_table ot using(order_id)) "
-			+ "	inner join product_table p using(product_id) where ot.order_date = ?1 and ot.status='Cancelled' group by p.category", nativeQuery = true)
+			+ "inner join product_table p using(product_id) where ot.order_date = ?1 and ot.status='Cancelled' group by p.category", nativeQuery = true)
 	List<ResultSet> quantityCancelledGroupByCategory(String date);
 	
 	 // 11. Return total cost of order sold on specific date

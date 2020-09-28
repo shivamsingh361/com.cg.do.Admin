@@ -1,12 +1,11 @@
 package com.cg.go.admin.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,107 +25,84 @@ public class AdminController {
 	@Autowired
 	GrowthService growthService;
 	
-	@RequestMapping(
+	@GetMapping(
 			value = "orderPlacedOn/{date}",
-			produces = "application/json",
-			method = RequestMethod.GET)
+			produces = "application/json")
 	public @ResponseBody Integer orderPlacedOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException{
 		return growthService.orderPlaced(date);
 	}
-	@RequestMapping(
+	@GetMapping(
 			value = "orderPlaced/{from}/{to}",
-			produces = "application/json",
-			method = RequestMethod.GET)
+			produces = "application/json")
 	public @ResponseBody Integer orderPlaced(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException{
 		return growthService.orderPlaced(from, to);
 	}
 	
-	@RequestMapping(
+	@GetMapping(
 			value = "orderCancelledOn/{date}",
-			produces = "application/json",
-			method = RequestMethod.GET)
+			produces = "application/json")
 	public @ResponseBody Integer orderCancelledOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException{
 		return growthService.orderCancelled(date);
 	}
-	@RequestMapping(
+	@GetMapping(
 			value = "orderCancelled/{from}/{to}",
-			produces = "application/json",
-			method = RequestMethod.GET)
+			produces = "application/json")
 	public @ResponseBody Integer orderCancelled(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException{
 		return growthService.orderCancelled(from, to);
 	}
 	
-	@RequestMapping(
+	@GetMapping(
 			  value = "orderSoldByCategoryOn/{date}", 
-			  produces = "application/json", 
-			  method = {RequestMethod.GET})
+			  produces = "application/json")
 	public @ResponseBody List<ResultSet> orderSoldByCategoryOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException, JsonProcessingException{
-		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		myMap = growthService.quantitySoldGroupByCategory(date);
-		return myMap;
+		return growthService.quantitySoldGroupByCategory(date);
 	}
 	
-	@RequestMapping(
+	@GetMapping(
 			  value = "orderSoldByCategory/{from}/{to}", 
-			  produces = "application/json", 
-			  method = {RequestMethod.GET})
+			  produces = "application/json")
 	public @ResponseBody List<ResultSet> orderSoldByCategory(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException, JsonProcessingException{
-		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		myMap = growthService.quantitySoldGroupByCategory(from, to);
-		return myMap;
+		return growthService.quantitySoldGroupByCategory(from, to);
 	}
 	
-	@RequestMapping(
+	@GetMapping(
 			  value = "orderCancelledByCategoryOn/{date}", 
-			  produces = "application/json", 
-			  method = {RequestMethod.GET})
+			  produces = "application/json")
 	public @ResponseBody List<ResultSet> orderCancelledByCategoryOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException, JsonProcessingException{
-		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		myMap = growthService.quantityCancelledGroupByCategory(date);
-		return myMap;
+		return growthService.quantityCancelledGroupByCategory(date);
 	}
 	
-	@RequestMapping(
+	@GetMapping(
 			  value = "orderCancelledByCategory/{from}/{to}", 
-			  produces = "application/json", 
-			  method = {RequestMethod.GET})
+			  produces = "application/json")
 	public @ResponseBody List<ResultSet> orderCancelledByCategory(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException, JsonProcessingException{
-		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		myMap = growthService.quantityCancelledGroupByCategory(from, to);
-		return myMap;
+		return growthService.quantityCancelledGroupByCategory(from, to);
 	}
 	
-	@RequestMapping(
+	@GetMapping(
 			value = "revenueGenerated/{from}/{to}",
-			produces = "application/json",
-			method = RequestMethod.GET)
+			produces = "application/json")
 	public @ResponseBody Double revenueGenerated(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException {
 		return revenueService.revenueGenerated(from, to);
 	}
-	@RequestMapping(
+	@GetMapping(
 			value = "revenueGeneratedOn/{date}",
-			produces = "application/json",
-			method = RequestMethod.GET)
+			produces = "application/json")
 	public @ResponseBody Double revenueGeneratedOn(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException {
 		return revenueService.revenueGenerated(from, to);
 	}
 	
-	@RequestMapping(
+	@GetMapping(
 			  value = "getCostOfOrderForStatusOn/{date}/{status}", 
-			  produces = "application/json", 
-			  method = {RequestMethod.GET})
+			  produces = "application/json")
 	public @ResponseBody List<ResultSet> getCostOfOrderForStatusOn(@PathVariable("date") String date, @PathVariable("status") String status) throws InvalidFormatException, UnknownException, JsonProcessingException{
-		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		myMap = revenueService.getCostOfOrderForStatus(date, status);
-		return myMap;
+		return revenueService.getCostOfOrderForStatus(date, status);
+		
 	}
-	@RequestMapping(
+	@GetMapping(
 			  value = "getCostOfOrderForStatus/{from}/{to}/{status}", 
-			  produces = "application/json", 
-			  method = {RequestMethod.GET})
+			  produces = "application/json")
 	public @ResponseBody List<ResultSet> getCostOfOrderForStatus(@PathVariable("from") String from, @PathVariable("to") String to, @PathVariable("status") String status) throws InvalidFormatException, UnknownException, JsonProcessingException{
-		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		myMap = revenueService.getCostOfOrderForStatus(from, to, status);
-		return myMap;
+		return revenueService.getCostOfOrderForStatus(from, to, status);
 	}
 }

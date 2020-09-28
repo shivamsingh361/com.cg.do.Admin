@@ -22,10 +22,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableCircuitBreaker
 public class GoRestApiAdminApplication {
 	
-	private static Logger LOGGER = LogManager.getLogger(GoRestApiAdminApplication.class);
+	private static Logger logger = LogManager.getLogger(GoRestApiAdminApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(GoRestApiAdminApplication.class, args);
-		LOGGER.info("Great Outdoors Admin RESTapi started!");
+		logger.info("Great Outdoors Admin RESTapi started!");
 	}
 	@Bean
     public Docket api() { 

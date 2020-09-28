@@ -15,7 +15,7 @@ import com.cg.go.admin.exceptions.UnknownException;
 
 @Service
 public class RevenueServiceImpl implements RevenueService {
-	private static Logger LOGGER = LogManager.getLogger(RevenueServiceImpl.class);
+	private static Logger logger = LogManager.getLogger(RevenueServiceImpl.class);
 
 	@Autowired
 	OrderDao orderdao;
@@ -29,60 +29,57 @@ public class RevenueServiceImpl implements RevenueService {
 
 	@Override
 	public double revenueGenerated(String from, String to) throws UnknownException, InvalidFormatException {
-		if (validate.isDateValid(from) && validate.isDateValid(to)) {
-			try {
-				return orderdao.revenueGenerated(from, to);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!(validate.isDateValid(from) && validate.isDateValid(to)))
+			throw new InvalidFormatException("Invalid Date in Method: revenueGenerated");
+		try {
+			return orderdao.revenueGenerated(from, to);
+		} catch (Exception e) {
+			logger.warn("Exception catched in revenueGenerated.", e);
+			throw new UnknownException(e);
+		}
+
 	}
 
 	@Override
 	public double revenueGenerated(String date) throws UnknownException, InvalidFormatException {
-		if (validate.isDateValid(date)) {
-			try {
-				return orderdao.revenueGenerated(date);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!validate.isDateValid(date))
+			throw new InvalidFormatException("Invalid Date in method: revenueGenerated");
+		try {
+			return orderdao.revenueGenerated(date);
+		} catch (Exception e) {
+			logger.warn("Exception catched in revenueGenerated.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
 	public List<ResultSet> getCostOfOrderForStatus(String date, String status)
 			throws UnknownException, InvalidFormatException {
-		if (validate.isDateValid(date)) {
-			try {
-				if (!(status.equals("Delivered") || status.equals("Cancelled") || status.equals("Returned")))
-					throw new InvalidFormatException("Invalid order status");
-				
-				return orderdao.getCostOfOrderForStatus(date,status);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!validate.isDateValid(date))
+			throw new InvalidFormatException("Invalid Date in Method: getCostOfOrderForStatus");
+		try {
+			if (!(status.equals("Delivered") || status.equals("Cancelled") || status.equals("Returned")))
+				throw new InvalidFormatException("Invalid order status");
+
+			return orderdao.getCostOfOrderForStatus(date, status);
+		} catch (Exception e) {
+			logger.warn("Exception catched in getCostOfOrderForStatus.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
 	public List<ResultSet> getCostOfOrderForStatus(String from, String to, String status)
 			throws UnknownException, InvalidFormatException {
-		if (validate.isDateValid(from) && validate.isDateValid(to)) {
-			try {
-				if (!(status.equals("Delivered") || status.equals("Cancelled") || status.equals("Returned")))
-					throw new InvalidFormatException("Invalid order status");
-				return orderdao.getCostOfOrderForStatus(from, to, status);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!(validate.isDateValid(from) && validate.isDateValid(to)))
+			throw new InvalidFormatException("Invalid Date in Method: getCostOfOrderForStatus");
+		try {
+			if (!(status.equals("Delivered") || status.equals("Cancelled") || status.equals("Returned")))
+				throw new InvalidFormatException("Invalid order status");
+			return orderdao.getCostOfOrderForStatus(from, to, status);
+		} catch (Exception e) {
+			logger.warn("Exception catched in getCostOfOrderForStatus.", e);
+			throw new UnknownException(e);
+		}
 	}
 }

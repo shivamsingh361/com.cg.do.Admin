@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.cg.go.admin.dto.ErrorInfo;
@@ -14,20 +13,19 @@ import com.cg.go.admin.dto.ErrorInfo;
 public class ControllerAdvice {
 
 	@ResponseStatus(value=HttpStatus.BAD_REQUEST, reason = "The Input Format/Syntex is not acceptable.")
-	@ExceptionHandler(value = InvalidFormatException.class)
-	@RequestMapping(produces = "application/vnd.error+json")
+	@ExceptionHandler(value = {InvalidFormatException.class})
 	protected ResponseEntity<ErrorInfo> handleFormatException(Exception ex, HttpServletRequest req) {
-		String bodyOfResponse = ex.getMessage();
+		String bodyOfResponse = "The Input Format/Syntex is not acceptable.\n"+ex.getMessage();
 		String uri = req.getRequestURL().toString();
 		return new ResponseEntity<ErrorInfo>(new ErrorInfo(uri, bodyOfResponse), HttpStatus.BAD_REQUEST);
 	}
 	
-	@ResponseStatus(value=HttpStatus.BAD_REQUEST, reason = "Some Un-expected handeled Exception.")
-	@ExceptionHandler(value = UnknownException.class)
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR, reason = "Some Un-expected handeled Exception.")
+	@ExceptionHandler(value = {UnknownException.class})
 	protected ResponseEntity<ErrorInfo> handleUnknownException(Exception ex, HttpServletRequest req) {
-		String bodyOfResponse = ex.getMessage();
+		String bodyOfResponse = "Some Un-expected handeled Exception.\n"+ex.getMessage();
 		String uri = req.getRequestURL().toString();
-		return new ResponseEntity<ErrorInfo>(new ErrorInfo(uri, bodyOfResponse), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ErrorInfo>(new ErrorInfo(uri, bodyOfResponse), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 }

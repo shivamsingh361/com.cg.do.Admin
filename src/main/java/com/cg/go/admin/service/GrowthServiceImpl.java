@@ -14,7 +14,7 @@ import com.cg.go.admin.exceptions.UnknownException;
 
 @Service
 public class GrowthServiceImpl implements GrowthService {
-	private static Logger LOGGER = LogManager.getLogger(GrowthServiceImpl.class);
+	private static Logger logger = LogManager.getLogger(GrowthServiceImpl.class);
 
 	@Autowired
 	OrderDao orderdao;
@@ -23,110 +23,101 @@ public class GrowthServiceImpl implements GrowthService {
 
 	@Override
 	public Integer orderPlaced(String date) throws InvalidFormatException, UnknownException {
-		if (validate.isDateValid(date)) {
-			try {
-				return orderdao.orderPlaced(date);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!validate.isDateValid(date))
+			throw new InvalidFormatException("Invalid Date in Method: orderPlaced");
+		try {
+			return orderdao.orderPlaced(date);
+		} catch (Exception e) {
+			logger.warn("Exception catched in orderPlaced.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
 	public Integer orderPlaced(String from, String to) throws InvalidFormatException, UnknownException {
-		if (validate.isDateValid(from) && validate.isDateValid(to)) {
-			try {
-				return orderdao.orderPlaced(from, to);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!(validate.isDateValid(from) && validate.isDateValid(to)))
+			throw new InvalidFormatException("Invalid Date in Method: orderPlaced");
+		try {
+			return orderdao.orderPlaced(from, to);
+		} catch (Exception e) {
+			logger.warn("Exception catched in orderPlaced.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
 	public Integer orderCancelled(String date) throws UnknownException, InvalidFormatException {
-		if (validate.isDateValid(date)) {
-			try {
-				return orderdao.orderCancelled(date);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!validate.isDateValid(date))
+			throw new InvalidFormatException("Invalid Date in Mehtod: orderCancelled");
+		try {
+			return orderdao.orderCancelled(date);
+		} catch (Exception e) {
+			logger.warn("Exception catched in orderCancelled.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
 	public Integer orderCancelled(String from, String to) throws InvalidFormatException, UnknownException {
-		if (validate.isDateValid(from) && validate.isDateValid(to)) {
-			try {
-				return orderdao.orderCancelled(from, to);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!(validate.isDateValid(from) && validate.isDateValid(to)))
+			throw new InvalidFormatException("Invalid Date in Method: orderCancelled");
+		try {
+			return orderdao.orderCancelled(from, to);
+		} catch (Exception e) {
+			logger.warn("Exception catched in orderCancelled.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
 	public List<ResultSet> quantitySoldGroupByCategory(String from, String to)
 			throws InvalidFormatException, UnknownException {
-		if (validate.isDateValid(from) && validate.isDateValid(to)) {
-			try {
-				return orderdao.quantitySoldGroupByCategory(from, to);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!(validate.isDateValid(from) && validate.isDateValid(to)))
+			throw new InvalidFormatException("Invalid Date in Method: quantitySoldGroupByCategory");
+		try {
+			return orderdao.quantitySoldGroupByCategory(from, to);
+		} catch (Exception e) {
+			logger.warn("Exception catched in quantitySoldGroupByCategory.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
-	public List<ResultSet> quantitySoldGroupByCategory(String date)
-			throws InvalidFormatException, UnknownException {
-		if (validate.isDateValid(date)) {
-			try {
-				return orderdao.quantitySoldGroupByCategory(date);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+	public List<ResultSet> quantitySoldGroupByCategory(String date) throws InvalidFormatException, UnknownException {
+		if (!validate.isDateValid(date))
+			throw new InvalidFormatException("Invalid Date in Method: quantitySoldGroupByCategory");
+		try {
+			return orderdao.quantitySoldGroupByCategory(date);
+		} catch (Exception e) {
+			logger.warn("Exception catched in quantitySoldGroupByCategory.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
 	public List<ResultSet> quantityCancelledGroupByCategory(String from, String to)
 			throws InvalidFormatException, UnknownException {
-		if (validate.isDateValid(from) && validate.isDateValid(to)) {
-			try {
-				return orderdao.quantityCancelledGroupByCategory(from, to);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!(validate.isDateValid(from) && validate.isDateValid(to)))
+			throw new InvalidFormatException("Invalid Date in Method: quantityCancelledGroupByCategory");
+		try {
+			return orderdao.quantityCancelledGroupByCategory(from, to);
+		} catch (Exception e) {
+			logger.warn("Exception catched in Method: quantityCancelledGroupByCategory.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 	@Override
 	public List<ResultSet> quantityCancelledGroupByCategory(String date)
 			throws InvalidFormatException, UnknownException {
-		if (validate.isDateValid(date)) {
-			try {
-				return orderdao.quantityCancelledGroupByCategory(date);
-			} catch (Exception e) {
-				LOGGER.warn("Exception catched in orderPlaced.",e);
-				throw new UnknownException(e);
-			}
-		} else
-			throw new InvalidFormatException("Invalid Date");
+		if (!validate.isDateValid(date))
+			throw new InvalidFormatException("Invalid Date in Method: quantityCancelledGroupByCategory");
+		try {
+			return orderdao.quantityCancelledGroupByCategory(date);
+		} catch (Exception e) {
+			logger.warn("Exception catched in Method: quantityCancelledGroupByCategory.", e);
+			throw new UnknownException(e);
+		}
 	}
 
 }

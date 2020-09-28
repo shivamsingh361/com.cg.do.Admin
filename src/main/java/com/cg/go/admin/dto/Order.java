@@ -26,7 +26,7 @@ public class Order {
 		super();
 	}
 
-	public Order(String order_id, String user_id, String status, String retailer_id, double amount, Date order_date) {
+	public Order(String order_id, String user_id, String status, double amount, Date order_date) {
 		super();
 		this.order_id = order_id;
 		this.user_id = user_id;
