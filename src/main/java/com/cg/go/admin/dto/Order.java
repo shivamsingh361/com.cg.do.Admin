@@ -17,8 +17,6 @@ public class Order {
 	private String user_id;
 	@Column(name="status")
 	private String status;
-	@Column(name="retailer_id")
-	private String retailer_id;
 	@Column(name="amount")
 	private double amount;
 	@Column(name="order_date")
@@ -33,7 +31,6 @@ public class Order {
 		this.order_id = order_id;
 		this.user_id = user_id;
 		this.status = status;
-		this.retailer_id = retailer_id;
 		this.amount = amount;
 		this.order_date = order_date;
 	}
@@ -50,10 +47,6 @@ public class Order {
 		return status;
 	}
 
-	public String getRetailer_id() {
-		return retailer_id;
-	}
-
 	public double getAmount() {
 		return amount;
 	}
@@ -64,8 +57,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", status=" + status + ", retailer_id="
-				+ retailer_id + ", ammount=" + amount + ", order_date=" + order_date + "]";
+		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", status=" + status + ", ammount=" + amount + ", order_date=" + order_date + "]";
 	}
 	
 }
