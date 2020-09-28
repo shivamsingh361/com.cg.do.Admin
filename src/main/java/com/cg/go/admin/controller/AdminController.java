@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,6 @@ import com.cg.go.admin.exceptions.UnknownException;
 import com.cg.go.admin.service.GrowthService;
 import com.cg.go.admin.service.RevenueService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/api")
@@ -45,42 +45,44 @@ public class AdminController {
 		return growthService.orderCancelled(from, to);
 	}
 	
-	@GetMapping("orderSoldByCategoryOn/{date}")
-	public @ResponseBody String orderSoldByCategoryOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException, JsonProcessingException{
+	@RequestMapping(
+			  value = "orderSoldByCategoryOn/{date}", 
+			  produces = "application/json", 
+			  method = {RequestMethod.GET})
+	public @ResponseBody List<ResultSet> orderSoldByCategoryOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException, JsonProcessingException{
 		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		String json = "";
 		myMap = growthService.quantitySoldGroupByCategory(date);
-		ObjectMapper mapper = new ObjectMapper();
-		json = mapper.writeValueAsString(myMap);
-		return json;
-	}
-	@GetMapping("orderSoldByCategory/{from}/{to}")
-	public @ResponseBody String orderSoldByCategory(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException, JsonProcessingException{
-		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		String json = "";
-		myMap = growthService.quantitySoldGroupByCategory(from, to);
-		ObjectMapper mapper = new ObjectMapper();
-		json = mapper.writeValueAsString(myMap);
-		return json;
+		return myMap;
 	}
 	
-	@GetMapping("orderCancelledByCategoryOn/{date}")
-	public @ResponseBody String orderCancelledByCategoryOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException, JsonProcessingException{
+	@RequestMapping(
+			  value = "orderSoldByCategory/{from}/{to}", 
+			  produces = "application/json", 
+			  method = {RequestMethod.GET})
+	public @ResponseBody List<ResultSet> orderSoldByCategory(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException, JsonProcessingException{
 		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		String json = "";
-		myMap = growthService.quantityCancelledGroupByCategory(date);
-		ObjectMapper mapper = new ObjectMapper();
-		json = mapper.writeValueAsString(myMap);
-		return json;
+		myMap = growthService.quantitySoldGroupByCategory(from, to);
+		return myMap;
 	}
-	@GetMapping("orderCancelledByCategory/{from}/{to}")
-	public @ResponseBody String orderCancelledByCategory(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException, JsonProcessingException{
+	
+	@RequestMapping(
+			  value = "orderCancelledByCategoryOn/{date}", 
+			  produces = "application/json", 
+			  method = {RequestMethod.GET})
+	public @ResponseBody List<ResultSet> orderCancelledByCategoryOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException, JsonProcessingException{
 		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		String json = "";
+		myMap = growthService.quantityCancelledGroupByCategory(date);
+		return myMap;
+	}
+	
+	@RequestMapping(
+			  value = "orderCancelledByCategory/{from}/{to}", 
+			  produces = "application/json", 
+			  method = {RequestMethod.GET})
+	public @ResponseBody List<ResultSet> orderCancelledByCategory(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException, JsonProcessingException{
+		List<ResultSet> myMap = new ArrayList<ResultSet>();
 		myMap = growthService.quantityCancelledGroupByCategory(from, to);
-		ObjectMapper mapper = new ObjectMapper();
-		json = mapper.writeValueAsString(myMap);
-		return json;
+		return myMap;
 	}
 	
 	@GetMapping("revenueGenerated/{from}/{to}")
@@ -92,23 +94,22 @@ public class AdminController {
 		return revenueService.revenueGenerated(from, to);
 	}
 	
-	
-	@GetMapping("getCostOfOrderForStatusOn/{date}/{status}")
-	public @ResponseBody String getCostOfOrderForStatusOn(@PathVariable("date") String date, @PathVariable("status") String status) throws InvalidFormatException, UnknownException, JsonProcessingException{
+	@RequestMapping(
+			  value = "getCostOfOrderForStatusOn/{date}/{status}", 
+			  produces = "application/json", 
+			  method = {RequestMethod.GET})
+	public @ResponseBody List<ResultSet> getCostOfOrderForStatusOn(@PathVariable("date") String date, @PathVariable("status") String status) throws InvalidFormatException, UnknownException, JsonProcessingException{
 		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		String json = "";
 		myMap = revenueService.getCostOfOrderForStatus(date, status);
-		ObjectMapper mapper = new ObjectMapper();
-		json = mapper.writeValueAsString(myMap);
-		return json;
+		return myMap;
 	}
-	@GetMapping("getCostOfOrderForStatusOn/{from}/{to}/{status}")
-	public @ResponseBody String getCostOfOrderForStatus(@PathVariable("from") String from, @PathVariable("to") String to, @PathVariable("status") String status) throws InvalidFormatException, UnknownException, JsonProcessingException{
+	@RequestMapping(
+			  value = "getCostOfOrderForStatus/{from}/{to}/{status}", 
+			  produces = "application/json", 
+			  method = {RequestMethod.GET})
+	public @ResponseBody List<ResultSet> getCostOfOrderForStatus(@PathVariable("from") String from, @PathVariable("to") String to, @PathVariable("status") String status) throws InvalidFormatException, UnknownException, JsonProcessingException{
 		List<ResultSet> myMap = new ArrayList<ResultSet>();
-		String json = "";
 		myMap = revenueService.getCostOfOrderForStatus(from, to, status);
-		ObjectMapper mapper = new ObjectMapper();
-		json = mapper.writeValueAsString(myMap);
-		return json;
+		return myMap;
 	}
 }

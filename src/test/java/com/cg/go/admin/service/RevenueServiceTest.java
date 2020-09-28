@@ -15,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.cg.go.admin.dao.OrderDao;
-import com.cg.go.admin.dao.ProductDao;
 import com.cg.go.admin.dto.ResultSet;
 import com.cg.go.admin.dto.ResultSetClass;
 import com.cg.go.admin.exceptions.InvalidFormatException;
@@ -29,8 +28,6 @@ public class RevenueServiceTest {
 	private OrderDao repo;
 	@MockBean
 	private Validate validate;
-	@MockBean
-	private ProductDao productDao;
 	@InjectMocks
 	private RevenueServiceImpl service;
 	

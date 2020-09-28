@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.go.admin.dao.OrderDao;
-import com.cg.go.admin.dao.ProductDao;
 import com.cg.go.admin.dto.Order;
 import com.cg.go.admin.dto.ResultSet;
 import com.cg.go.admin.exceptions.InvalidFormatException;
@@ -18,8 +17,6 @@ public class RevenueServiceImpl implements RevenueService {
 	OrderDao orderdao;
 	@Autowired
 	Validate validate;
-	@Autowired
-	ProductDao productDao;
 
 	@Override
 	public Iterable<Order> findAll() {
