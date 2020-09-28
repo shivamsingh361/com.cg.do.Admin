@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,20 +26,32 @@ public class AdminController {
 	@Autowired
 	GrowthService growthService;
 	
-	@GetMapping("orderPlacedOn/{date}")
+	@RequestMapping(
+			value = "orderPlacedOn/{date}",
+			produces = "application/json",
+			method = RequestMethod.GET)
 	public @ResponseBody Integer orderPlacedOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException{
 		return growthService.orderPlaced(date);
 	}
-	@GetMapping("orderPlaced/{from}/{to}")
+	@RequestMapping(
+			value = "orderPlaced/{from}/{to}",
+			produces = "application/json",
+			method = RequestMethod.GET)
 	public @ResponseBody Integer orderPlaced(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException{
 		return growthService.orderPlaced(from, to);
 	}
 	
-	@GetMapping("orderCancelledOn/{date}")
+	@RequestMapping(
+			value = "orderCancelledOn/{date}",
+			produces = "application/json",
+			method = RequestMethod.GET)
 	public @ResponseBody Integer orderCancelledOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException{
 		return growthService.orderCancelled(date);
 	}
-	@GetMapping("orderCancelled/{from}/{to}")
+	@RequestMapping(
+			value = "orderCancelled/{from}/{to}",
+			produces = "application/json",
+			method = RequestMethod.GET)
 	public @ResponseBody Integer orderCancelled(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException{
 		return growthService.orderCancelled(from, to);
 	}
@@ -85,11 +96,17 @@ public class AdminController {
 		return myMap;
 	}
 	
-	@GetMapping("revenueGenerated/{from}/{to}")
+	@RequestMapping(
+			value = "revenueGenerated/{from}/{to}",
+			produces = "application/json",
+			method = RequestMethod.GET)
 	public @ResponseBody Double revenueGenerated(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException {
 		return revenueService.revenueGenerated(from, to);
 	}
-	@GetMapping("revenueGeneratedOn/{date}")
+	@RequestMapping(
+			value = "revenueGeneratedOn/{date}",
+			produces = "application/json",
+			method = RequestMethod.GET)
 	public @ResponseBody Double revenueGeneratedOn(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException {
 		return revenueService.revenueGenerated(from, to);
 	}

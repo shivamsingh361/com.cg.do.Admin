@@ -1,5 +1,7 @@
 package com.cg.go.admin;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -19,9 +21,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaClient
 @EnableCircuitBreaker
 public class GoRestApiAdminApplication {
-
+	
+	private static Logger LOGGER = LogManager.getLogger(GoRestApiAdminApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(GoRestApiAdminApplication.class, args);
+		LOGGER.info("Great Outdoors Admin RESTapi started!");
 	}
 	@Bean
     public Docket api() { 

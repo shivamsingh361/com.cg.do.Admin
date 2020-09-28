@@ -1,6 +1,9 @@
 package com.cg.go.admin.service;
 
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,7 @@ import com.cg.go.admin.exceptions.UnknownException;
 
 @Service
 public class GrowthServiceImpl implements GrowthService {
+	private static Logger LOGGER = LogManager.getLogger(GrowthServiceImpl.class);
 
 	@Autowired
 	OrderDao orderdao;
@@ -23,6 +27,7 @@ public class GrowthServiceImpl implements GrowthService {
 			try {
 				return orderdao.orderPlaced(date);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -35,6 +40,7 @@ public class GrowthServiceImpl implements GrowthService {
 			try {
 				return orderdao.orderPlaced(from, to);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -47,6 +53,7 @@ public class GrowthServiceImpl implements GrowthService {
 			try {
 				return orderdao.orderCancelled(date);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -59,6 +66,7 @@ public class GrowthServiceImpl implements GrowthService {
 			try {
 				return orderdao.orderCancelled(from, to);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -72,6 +80,7 @@ public class GrowthServiceImpl implements GrowthService {
 			try {
 				return orderdao.quantitySoldGroupByCategory(from, to);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -85,6 +94,7 @@ public class GrowthServiceImpl implements GrowthService {
 			try {
 				return orderdao.quantitySoldGroupByCategory(date);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -98,6 +108,7 @@ public class GrowthServiceImpl implements GrowthService {
 			try {
 				return orderdao.quantityCancelledGroupByCategory(from, to);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -111,6 +122,7 @@ public class GrowthServiceImpl implements GrowthService {
 			try {
 				return orderdao.quantityCancelledGroupByCategory(date);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else

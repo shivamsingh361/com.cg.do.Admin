@@ -2,6 +2,8 @@ package com.cg.go.admin.service;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import com.cg.go.admin.exceptions.UnknownException;
 
 @Service
 public class RevenueServiceImpl implements RevenueService {
+	private static Logger LOGGER = LogManager.getLogger(RevenueServiceImpl.class);
+
 	@Autowired
 	OrderDao orderdao;
 	@Autowired
@@ -29,6 +33,7 @@ public class RevenueServiceImpl implements RevenueService {
 			try {
 				return orderdao.revenueGenerated(from, to);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -41,6 +46,7 @@ public class RevenueServiceImpl implements RevenueService {
 			try {
 				return orderdao.revenueGenerated(date);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -57,6 +63,7 @@ public class RevenueServiceImpl implements RevenueService {
 				
 				return orderdao.getCostOfOrderForStatus(date,status);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
@@ -72,6 +79,7 @@ public class RevenueServiceImpl implements RevenueService {
 					throw new InvalidFormatException("Invalid order status");
 				return orderdao.getCostOfOrderForStatus(from, to, status);
 			} catch (Exception e) {
+				LOGGER.warn("Exception catched in orderPlaced.",e);
 				throw new UnknownException(e);
 			}
 		} else
