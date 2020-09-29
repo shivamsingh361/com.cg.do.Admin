@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,12 +27,12 @@ public class GrowthServiceTest {
 	@MockBean 
 	private OrderDao repo;
 	@MockBean
+	@Autowired
 	private Validate validate;
 	@InjectMocks
 	private GrowthServiceImpl service;
 	
 	@Test
-	@ExceptionHandler
 	public void testOrderPlacedOn() throws InvalidFormatException, UnknownException {
 		String date = "2020-02-02";
 		Mockito.when(validate.isDateValid(date)).thenReturn(true);
@@ -41,7 +42,6 @@ public class GrowthServiceTest {
 	}
 	
 	@Test
-	@ExceptionHandler
 	public void testOrderPlaced() throws InvalidFormatException, UnknownException {
 		String from = "2020-02-01";
 		String to = "2020-02-24";
@@ -63,7 +63,6 @@ public class GrowthServiceTest {
 	}
 	
 	@Test
-	@ExceptionHandler
 	public void testOrderCancelled() throws InvalidFormatException, UnknownException {
 		String from = "2020-02-01";
 		String to = "2020-02-23";
@@ -75,7 +74,6 @@ public class GrowthServiceTest {
 	}	
 	
 	@Test
-	@ExceptionHandler
 	public void testQuantitySoldGroupByCategory() throws InvalidFormatException, UnknownException {
 		String from = "2020-02-01";
 		String to = "2020-02-23";
@@ -93,7 +91,6 @@ public class GrowthServiceTest {
 		assertEquals(344, result.get(2).getQty());
 	} 
 	@Test
-	@ExceptionHandler
 	public void testQuantitySoldGroupByCategoryOn() throws InvalidFormatException, UnknownException {
 		String date = "2020-02-01";
 		List<ResultSet> myList = new ArrayList<ResultSet>();
@@ -110,7 +107,6 @@ public class GrowthServiceTest {
 	} 
 
 	@Test
-	@ExceptionHandler
 	public void testQuantityCancelledGroupByCategory() throws InvalidFormatException, UnknownException {
 		String from = "2020-02-01";
 		String to = "2020-02-23";
@@ -128,7 +124,6 @@ public class GrowthServiceTest {
 		assertEquals(4, result.get(2).getQty());
 	} 
 	@Test
-	@ExceptionHandler
 	public void testQuantityCancelledGroupByCategoryOn() throws InvalidFormatException, UnknownException {
 		String date = "2020-02-01";
 		List<ResultSet> myList = new ArrayList<ResultSet>();
