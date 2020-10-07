@@ -13,7 +13,7 @@ public class Validate {
 	}
 	public boolean isDateValid(String date) {
 		try {
-	        df.parse(date);
+	        this.df.parse(date);
 	        return true;
 	    } catch (ParseException ex) {
 	        return false;

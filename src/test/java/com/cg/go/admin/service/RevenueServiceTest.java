@@ -68,7 +68,7 @@ public class RevenueServiceTest {
 		List<ResultSet> result = service.getCostOfOrderForStatus(date, status);
 		assertEquals(4, result.size());
 		assertEquals("Camping", result.get(2).getCategory());
-		assertEquals(3, result.get(0).getQty());
+		assertEquals(3, result.get(0).getVal());
 		
 	}
 	
@@ -89,7 +89,7 @@ public class RevenueServiceTest {
 		List<ResultSet> result = service.getCostOfOrderForStatus(from, to, status);
 		assertEquals(4, result.size());
 		assertEquals("Golf", result.get(2).getCategory());
-		assertEquals(3.0, result.get(0).getQty());
+		assertEquals(3.0, result.get(0).getVal());
 		
 	}
 

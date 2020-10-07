@@ -28,11 +28,14 @@ public class RevenueServiceImpl implements RevenueService {
 	}
 
 	@Override
-	public double revenueGenerated(String from, String to) throws UnknownException, InvalidFormatException {
+	public Double revenueGenerated(String from, String to) throws UnknownException, InvalidFormatException {
 		if (!(validate.isDateValid(from) && validate.isDateValid(to)))
 			throw new InvalidFormatException("Invalid Date in Method: revenueGenerated");
 		try {
-			return orderdao.revenueGenerated(from, to);
+			Double revenue = orderdao.revenueGenerated(from, to);
+			if(revenue==null)
+				return 0.0;
+			return revenue;
 		} catch (Exception e) {
 			logger.warn("Exception catched in revenueGenerated.", e);
 			throw new UnknownException(e);
@@ -41,11 +44,14 @@ public class RevenueServiceImpl implements RevenueService {
 	}
 
 	@Override
-	public double revenueGenerated(String date) throws UnknownException, InvalidFormatException {
+	public Double revenueGenerated(String date) throws UnknownException, InvalidFormatException {
 		if (!validate.isDateValid(date))
 			throw new InvalidFormatException("Invalid Date in method: revenueGenerated");
 		try {
-			return orderdao.revenueGenerated(date);
+			Double revenue = orderdao.revenueGenerated(date);			
+			if(revenue==null)
+				return 0.0;
+			return revenue;
 		} catch (Exception e) {
 			logger.warn("Exception catched in revenueGenerated.", e);
 			throw new UnknownException(e);

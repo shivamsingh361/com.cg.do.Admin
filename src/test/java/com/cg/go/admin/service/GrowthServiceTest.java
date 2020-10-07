@@ -88,7 +88,7 @@ public class GrowthServiceTest {
 		List<ResultSet> result = service.quantitySoldGroupByCategory(from, to);
 		assertEquals(4, result.size());
 		assertEquals("Baseball", result.get(0).getCategory());
-		assertEquals(344, result.get(2).getQty());
+		assertEquals(344, result.get(2).getVal());
 	} 
 	@Test
 	public void testQuantitySoldGroupByCategoryOn() throws InvalidFormatException, UnknownException {
@@ -103,7 +103,7 @@ public class GrowthServiceTest {
 		List<ResultSet> result = service.quantitySoldGroupByCategory(date);
 		assertEquals(4, result.size());
 		assertEquals("Running", result.get(0).getCategory());
-		assertEquals(34, result.get(2).getQty());
+		assertEquals(34, result.get(2).getVal());
 	} 
 
 	@Test
@@ -121,7 +121,7 @@ public class GrowthServiceTest {
 		List<ResultSet> result = service.quantityCancelledGroupByCategory(from, to);
 		assertEquals(4, result.size());
 		assertEquals("Baseball", result.get(0).getCategory());
-		assertEquals(4, result.get(2).getQty());
+		assertEquals(4, result.get(2).getVal());
 	} 
 	@Test
 	public void testQuantityCancelledGroupByCategoryOn() throws InvalidFormatException, UnknownException {
@@ -136,6 +136,6 @@ public class GrowthServiceTest {
 		List<ResultSet> result = service.quantityCancelledGroupByCategory(date);
 		assertEquals(4, result.size());
 		assertEquals("Running", result.get(0).getCategory());
-		assertEquals(3, result.get(2).getQty());
+		assertEquals(3, result.get(2).getVal());
 	}
 }

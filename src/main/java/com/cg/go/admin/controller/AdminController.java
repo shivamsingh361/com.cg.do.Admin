@@ -3,6 +3,7 @@ package com.cg.go.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value = {"http://localhost:4200", "http://localhost:4300"})
 public class AdminController {
 	
 	@Autowired
@@ -88,8 +90,8 @@ public class AdminController {
 	@GetMapping(
 			value = "revenueGeneratedOn/{date}",
 			produces = "application/json")
-	public @ResponseBody Double revenueGeneratedOn(@PathVariable("from") String from, @PathVariable("to") String to) throws InvalidFormatException, UnknownException {
-		return revenueService.revenueGenerated(from, to);
+	public @ResponseBody Double revenueGeneratedOn(@PathVariable("date") String date) throws InvalidFormatException, UnknownException {
+		return revenueService.revenueGenerated(date);
 	}
 	
 	@GetMapping(

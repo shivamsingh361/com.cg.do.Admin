@@ -10,9 +10,9 @@ import com.cg.go.admin.exceptions.UnknownException;
 public interface RevenueService {
 	Iterable<Order> findAll();
 
-	double revenueGenerated(String from, String to) throws InvalidFormatException, UnknownException;
+	Double revenueGenerated(String from, String to) throws InvalidFormatException, UnknownException;
 
-	double revenueGenerated(String date) throws InvalidFormatException, UnknownException;
+	Double revenueGenerated(String date) throws InvalidFormatException, UnknownException;
 
 	List<ResultSet> getCostOfOrderForStatus(String date, String status)
 			throws InvalidFormatException, UnknownException;
